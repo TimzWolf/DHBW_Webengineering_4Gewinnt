@@ -1,5 +1,7 @@
 body {
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     user-select: none;
 }
@@ -7,7 +9,6 @@ body {
 #board {
     position: relative;
     display: inline-block;
-    margin-top: 20px;
 }
 
 .cell {
@@ -35,15 +36,7 @@ body {
     background-color: rgba(255, 0, 0);
 }
 
-#status {
-    margin-top: 20px;
-    font-weight: bold;
-}
-
 #reset {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     padding: 20px 35px;
     font-size: 20px;
     background-color: rgba(0, 255, 0, 0.5);
@@ -52,14 +45,15 @@ body {
     cursor: pointer;
     color: white;
     font-weight: bold;
-    display: none;
-    transform: translate(-50%, -50%);
+    visibility: hidden;
+    margin-top: 30px;
 }
 
 #playerIndicator {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .playerCircle {

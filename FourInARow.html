@@ -3,32 +3,37 @@
 <head>
     <title>Vier Gewinnt</title>
     <link rel="stylesheet" type="text/css" href="FourInARow.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="FourInARow.js"></script>
 </head>
 <body>
-<h1>Vier Gewinnt</h1>
-<div id="playerIndicator">
-    <div class="playerCircle yellowCircle"></div>
-    <div class="playerCircle redCircle"></div>
-</div>
-<div id="board"></div>
-<script>
-    var board = document.getElementById("board");
+    <h1>Vier Gewinnt</h1>
+    <div id="playerIndicator">
+        <div class="playerCircle yellowCircle"></div>
+        <div class="playerCircle redCircle"></div>
+    </div>
+    <div id="board"></div>
+    <script>
+        var board = document.getElementById("board");
 
-    for (var row = 0; row < 6; row++) {
-        var rowElement = document.createElement("div");
-        rowElement.className = "row";
+        for (var row = 0; row < 6; row++) {
+            var rowElement = document.createElement("div");
+            rowElement.className = "row";
 
-        for (var cell = 0; cell < 7; cell++) {
-            var cellElement = document.createElement("div");
-            cellElement.className = "cell empty";
-            rowElement.appendChild(cellElement);
+            for (var cell = 0; cell < 7; cell++) {
+                var cellElement = document.createElement("div");
+                cellElement.className = "cell empty";
+                rowElement.appendChild(cellElement);
+            }
+
+            board.appendChild(rowElement);
         }
-
-        board.appendChild(rowElement);
-    }
-</script>
-<div id="status"></div>
-<button id="reset">Neues Spiel</button>
+    </script>
+    <div>
+        <p id="status"></p>
+    </div>
+    <div>
+        <button id="reset">Neues Spiel</button>
+    </div>
 </body>
 </html>
