@@ -54,8 +54,7 @@ body {
 #playerIndicator {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .playerCircle {
@@ -74,17 +73,13 @@ body {
     background-color: red;
 }
 
-.cell.winYellow {
-    background-color: rgba(128, 128, 128);
-}
-
+.cell.winYellow,
 .cell.winRed {
     background-color: rgba(128, 128, 128);
 }
 
 #gameBoard {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-around;
 }
@@ -115,6 +110,7 @@ body {
     margin-top: 20px;
     background-color: #555;
     color: #fff;
+    opacity: 0.7;
 }
 
 #switchThemeButton {
@@ -139,9 +135,3 @@ body {
     color: white;
     font-weight: bold;
 }
-
-
-
-
-
-
