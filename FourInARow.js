@@ -6,6 +6,17 @@ $(document).ready(function() {
 
     let currentPlayer = "yellow";
     let gameOver = false;
+    updatePlayerScores();
+    
+    // Set up event Listener for theme switch
+    document.getElementById("themeSwitch").addEventListener("click", function() {
+        var linkElement = document.getElementById("themeCSS");
+        if (linkElement.getAttribute("href") === "FourInARowDark.css") {
+            linkElement.setAttribute("href", "FourInARowWhite.css");
+        } else {
+            linkElement.setAttribute("href", "FourInARowDark.css");
+        }
+    });
 
     // Set up click event listeners for each cell
     cells.on("click", function() {
@@ -59,6 +70,15 @@ $(document).ready(function() {
             checkDiagonalWin1(columnIndex, rowIndex) ||
             checkDiagonalWin2(columnIndex, rowIndex)
         ) {
+
+            // Add 1 to winner score
+            let scores = loadScores();
+            (currentPlayer === "yellow" ? scores.yellow++ : scores.red++);
+            saveScores(scores);
+
+            // Update Scores
+            updatePlayerScores();
+
             markWinningCells();
             return true;
         }
@@ -185,12 +205,7 @@ $(document).ready(function() {
 
     // Function to mark the winning cells
     function markWinningCells() {
-        let winningCells;
-        if (currentPlayer === "yellow") {
-            winningCells = "winYellow";
-        } else {
-            winningCells = "winRed";
-        }
+        let winningCells = (currentPlayer === "yellow" ? "winYellow" : "winRed");
 
         // Vertical win
         for (let col = 0; col < 7; col++) {
@@ -268,6 +283,7 @@ $(document).ready(function() {
     // Function to reset the game
     function resetGame() {
         location.reload();
+        updatePlayerScores()
     }
 
     // Function to update the player indicator
@@ -284,4 +300,33 @@ $(document).ready(function() {
     }
 
     updatePlayerIndicator();
+
+    // Load scores from Cookies
+    function loadScores() {
+        const scoresCookie = document.cookie.replace(/(?:(?:^|.*;\s*)scores\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (scoresCookie) {
+            return JSON.parse(scoresCookie);
+        } else {
+            return {
+                red: 0,
+                yellow: 0
+            };
+        }
+    }
+
+    // Save scores to Cookies
+    function saveScores(scores) {
+        document.cookie = `scores=${JSON.stringify(scores)}`;
+    }
+
+    function updatePlayerScores(){
+        let scores = loadScores();
+        $("#pointsRed").text(scores.red);
+        $("#pointsYellow").text(scores.yellow);
+    }
+
+
 });
+
+
+
