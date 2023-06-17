@@ -7,8 +7,9 @@ $(document).ready(function() {
     let currentPlayer = "yellow";
     let gameOver = false;
     updatePlayerScores();
+    reloadSizes();
     
-    // Set up event Listener for theme switch
+    // Set up click event Listener for theme switch
     document.getElementById("themeSwitch").addEventListener("click", function() {
         var linkElement = document.getElementById("themeCSS");
         if (linkElement.getAttribute("href") === "FourInARowDark.css") {
@@ -16,6 +17,64 @@ $(document).ready(function() {
         } else {
             linkElement.setAttribute("href", "FourInARowDark.css");
         }
+    });
+
+    //set up click event Listener for increase Button
+    document.getElementById("increaseSize").addEventListener("click", function() {
+        let sizes = loadSizes();
+        //increase cells
+        sizes.cellWidth += 10;
+        sizes.cellHeight += 10;
+
+        //increase PlayerCircle
+        sizes.playerCircleWidth += 10;
+        sizes.playerCircleHeight += 10;
+
+        saveSizes(sizes);
+        reloadSizes()
+    });
+
+    //change sizes in GUI
+    function reloadSizes(){
+        let sizes = loadSizes();
+        cells.css({
+            "width": sizes.cellWidth,
+            "height": sizes.cellHeight
+        });
+        playerCircles.css({
+            "width": sizes.playerCircleWidth,
+            "height": sizes.playerCircleHeight
+        });
+    }
+
+    //set up click event Listener for decrease Button
+    document.getElementById("decreaseSize").addEventListener("click", function() {
+        let sizes = loadSizes();
+        //decrease cells
+        sizes.cellWidth -= 10;
+        sizes.cellHeight -= 10;
+
+        //decrease PlayerCircle
+        sizes.playerCircleWidth -= 10;
+        sizes.playerCircleHeight -= 10;
+
+        saveSizes(sizes);
+        reloadSizes()
+    });
+
+    //Set up click event Listener for resetSize Button
+    document.getElementById("resetSize").addEventListener("click", function() {
+        let sizes = loadSizes();
+        //decrease cells
+        sizes.cellWidth = 50;
+        sizes.cellHeight = 50;
+
+        //decrease PlayerCircle
+        sizes.playerCircleWidth = 20;
+        sizes.playerCircleHeight = 20;
+
+        saveSizes(sizes);
+        reloadSizes()
     });
 
     // Set up click event listeners for each cell
@@ -317,6 +376,26 @@ $(document).ready(function() {
     // Save scores to Cookies
     function saveScores(scores) {
         document.cookie = `scores=${JSON.stringify(scores)}`;
+    }
+
+    // Load sizes from Cookies
+    function loadSizes() {
+        const sizesCookie = document.cookie.replace(/(?:(?:^|.*;\s*)sizes\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (sizesCookie) {
+            return JSON.parse(sizesCookie);
+        } else {
+            return {
+                cellWidth: cells.attr("width"),
+                cellHeight: cells.attr("height"),
+                playerCircleWidth: playerCircles.attr("width"),
+                playerCircleHeight: playerCircles.attr("height")
+            };
+        }
+    }
+
+    // Save sizes to Cookies
+    function saveSizes(sizes) {
+        document.cookie = `sizes=${JSON.stringify(sizes)}`;
     }
 
     function updatePlayerScores(){

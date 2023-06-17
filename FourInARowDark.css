@@ -42,19 +42,6 @@ body {
     background-color: rgba(128, 128, 128);
 }
 
-#reset {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #444;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #fff;
-    font-weight: bold;
-    visibility: hidden;
-    margin: 30px 0;
-}
-
 #playerIndicator {
     display: flex;
     justify-content: center;
@@ -97,26 +84,23 @@ body {
     margin-top: 20px;
 }
 
-#reset, #switchThemeButton {
+#reset {
+    visibility: hidden;
     margin-top: 20px;
 }
 
-#reset {
-    background-color: #555;
+
+#ThemeButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
-#switchThemeButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+.Button:hover {
     opacity: 0.7;
 }
 
-#switchThemeButton:hover {
-    opacity: 1;
-}
-
-#themeSwitch {
+.Button {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #444;
@@ -125,4 +109,5 @@ body {
     cursor: pointer;
     color: #fff;
     font-weight: bold;
+    margin: 0 5px 0 5px;
 }

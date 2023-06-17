@@ -38,19 +38,6 @@ body {
     background-color: red;
 }
 
-#reset {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #ebebeb;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #222;
-    font-weight: bold;
-    visibility: hidden;
-    margin-top: 30px;
-}
-
 #playerIndicator {
     display: flex;
     justify-content: center;
@@ -108,24 +95,20 @@ body {
 #reset {
     visibility: hidden;
     margin-top: 20px;
-    background-color: #555;
-    color: #fff;
-    opacity: 0.7;
 }
 
-#switchThemeButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+#ThemeButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
-#switchThemeButton:hover {
+.Button:hover {
     opacity: 1;
 }
 
-#themeSwitch {
+.Button {
+    opacity: 0.7;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #444;
@@ -134,4 +117,5 @@ body {
     cursor: pointer;
     color: white;
     font-weight: bold;
+    margin: 0 5px 0 5px;
 }
