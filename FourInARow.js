@@ -8,15 +8,18 @@ $(document).ready(function() {
     let gameOver = false;
     updatePlayerScores();
     reloadSizes();
+    reloadTheme();
     
     // Set up click event Listener for theme switch
     document.getElementById("themeSwitch").addEventListener("click", function() {
-        var linkElement = document.getElementById("themeCSS");
-        if (linkElement.getAttribute("href") === "FourInARowDark.css") {
-            linkElement.setAttribute("href", "FourInARowWhite.css");
+        let theme = loadTheme();
+        if (theme === "FourInARowDark.css") {
+            theme = "FourInARowWhite.css";
         } else {
-            linkElement.setAttribute("href", "FourInARowDark.css");
+            theme = "FourInARowDark.css";
         }
+        saveTheme(theme);
+        reloadTheme();
     });
 
     //set up click event Listener for increase Button
@@ -33,19 +36,6 @@ $(document).ready(function() {
         saveSizes(sizes);
         reloadSizes()
     });
-
-    //change sizes in GUI
-    function reloadSizes(){
-        let sizes = loadSizes();
-        cells.css({
-            "width": sizes.cellWidth,
-            "height": sizes.cellHeight
-        });
-        playerCircles.css({
-            "width": sizes.playerCircleWidth,
-            "height": sizes.playerCircleHeight
-        });
-    }
 
     //set up click event Listener for decrease Button
     document.getElementById("decreaseSize").addEventListener("click", function() {
@@ -76,6 +66,25 @@ $(document).ready(function() {
         saveSizes(sizes);
         reloadSizes()
     });
+
+    //change sizes in GUI
+    function reloadSizes(){
+        let sizes = loadSizes();
+        cells.css({
+            "width": sizes.cellWidth,
+            "height": sizes.cellHeight
+        });
+        playerCircles.css({
+            "width": sizes.playerCircleWidth,
+            "height": sizes.playerCircleHeight
+        });
+    }
+
+    //change theme in GUI
+    function reloadTheme(){
+        let linkElement = document.getElementById("themeCSS");
+        linkElement.setAttribute("href", loadTheme());
+    }
 
     // Set up click event listeners for each cell
     cells.on("click", function() {
@@ -162,11 +171,7 @@ $(document).ready(function() {
             count++;
             y++;
         }
-
-        if (count >= 4) {
-            return true;
-        }
-        return false;
+        return count >= 4;
     }
 
     // Function to check for a horizontal win
@@ -187,11 +192,7 @@ $(document).ready(function() {
             count++;
             x++;
         }
-
-        if (count >= 4) {
-            return true;
-        }
-        return false;
+        return count >= 4;
     }
 
     // Function to check for a diagonal win (top left to bottom right)
@@ -216,11 +217,7 @@ $(document).ready(function() {
             x++;
             y++;
         }
-
-        if (count >= 4) {
-            return true;
-        }
-        return false;
+        return count >= 4;
     }
 
     // Function to check for a diagonal win (top right to bottom left)
@@ -245,11 +242,7 @@ $(document).ready(function() {
             x++;
             y--;
         }
-
-        if (count >= 4) {
-            return true;
-        }
-        return false;
+        return count >= 4;
     }
 
     // Function to check for a draw
@@ -362,7 +355,7 @@ $(document).ready(function() {
 
     // Load scores from Cookies
     function loadScores() {
-        const scoresCookie = document.cookie.replace(/(?:(?:^|.*;\s*)scores\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        const scoresCookie = document.cookie.replace(/(?:^|.*;\s*)scores\s*\=\s*([^;]*).*$|^.*$/, "$1");
         if (scoresCookie) {
             return JSON.parse(scoresCookie);
         } else {
@@ -380,7 +373,7 @@ $(document).ready(function() {
 
     // Load sizes from Cookies
     function loadSizes() {
-        const sizesCookie = document.cookie.replace(/(?:(?:^|.*;\s*)sizes\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        const sizesCookie = document.cookie.replace(/(?:^|.*;\s*)sizes\s*\=\s*([^;]*).*$|^.*$/, "$1");
         if (sizesCookie) {
             return JSON.parse(sizesCookie);
         } else {
@@ -396,6 +389,21 @@ $(document).ready(function() {
     // Save sizes to Cookies
     function saveSizes(sizes) {
         document.cookie = `sizes=${JSON.stringify(sizes)}`;
+    }
+
+    // Load theme from Cookies
+    function loadTheme() {
+        const themeCookie = document.cookie.replace(/(?:^|.*;\s*)theme\s*\=\s*([^;]*).*$|^.*$/, "$1");
+        if (themeCookie) {
+            return JSON.parse(themeCookie);
+        } else {
+            return "FourInARowDark.css";
+        }
+    }
+
+    // Save theme to Cookies
+    function saveTheme(theme) {
+        document.cookie = `theme=${JSON.stringify(theme)}`;
     }
 
     function updatePlayerScores(){
