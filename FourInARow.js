@@ -25,6 +25,7 @@ $(document).ready(function() {
     //set up click event Listener for increase Button
     document.getElementById("increaseSize").addEventListener("click", function() {
         let sizes = loadSizes();
+        console.log("Width: " , sizes.cellWidth , " Height: " ,  sizes.cellHeight);
         //increase cells
         sizes.cellWidth += 10;
         sizes.cellHeight += 10;
@@ -378,10 +379,10 @@ $(document).ready(function() {
             return JSON.parse(sizesCookie);
         } else {
             return {
-                cellWidth: cells.attr("width"),
-                cellHeight: cells.attr("height"),
-                playerCircleWidth: playerCircles.attr("width"),
-                playerCircleHeight: playerCircles.attr("height")
+                cellWidth: parseInt(cells.css("width")),
+                cellHeight: parseInt(cells.css("height")),
+                playerCircleWidth: parseInt(playerCircles.css("width")),
+                playerCircleHeight: parseInt(playerCircles.css("height"))
             };
         }
     }
