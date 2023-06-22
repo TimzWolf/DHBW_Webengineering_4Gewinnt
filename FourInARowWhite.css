@@ -101,6 +101,11 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    position:absolute;
+    right:0;
+    bottom:0;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .Button:hover {
