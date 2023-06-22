@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     let currentPlayer = "yellow";
     let gameOver = false;
-    updatePlayerScores();
+    reloadPlayerScores();
     reloadSizes();
     reloadTheme();
 
@@ -16,7 +16,7 @@ $(document).ready(function() {
         scores.red = 0;
         scores.yellow = 0;
         saveScores(scores);
-        updatePlayerScores();
+        reloadPlayerScores();
     });
 
     // Set up click event Listener for theme switch
@@ -73,19 +73,9 @@ $(document).ready(function() {
         reloadSizes()
     });
 
-    //Set up click event Listener for resetSize Button
-    document.getElementById("resetSize").addEventListener("click", function() {
-        let sizes = loadSizes();
-        //decrease cells
-        sizes.cellWidth = 50;
-        sizes.cellHeight = 50;
-
-        //decrease PlayerCircle
-        sizes.playerCircleWidth = 20;
-        sizes.playerCircleHeight = 20;
-
-        saveSizes(sizes);
-        reloadSizes()
+    //Set up click event Listener for resetGame Button
+    document.getElementById("resetGame").addEventListener("click", function() {
+        location.reload();
     });
 
     //change sizes in GUI
@@ -166,7 +156,7 @@ $(document).ready(function() {
             saveScores(scores);
 
             // Update Scores
-            updatePlayerScores();
+            reloadPlayerScores();
 
             markWinningCells();
             return true;
@@ -356,7 +346,6 @@ $(document).ready(function() {
     // Function to reset the game
     function resetGame() {
         location.reload();
-        updatePlayerScores()
     }
 
     // Function to update the player indicator
@@ -427,7 +416,7 @@ $(document).ready(function() {
         document.cookie = `theme=${JSON.stringify(theme)}`;
     }
 
-    function updatePlayerScores(){
+    function reloadPlayerScores(){
         let scores = loadScores();
         $("#pointsRed").text(scores.red);
         $("#pointsYellow").text(scores.yellow);
