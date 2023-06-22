@@ -24,8 +24,10 @@ $(document).ready(function() {
         let theme = loadTheme();
         if (theme === "FourInARowDark.css") {
             theme = "FourInARowWhite.css";
+            $("#themeSwitch").find("img").attr("src", "moon.png");
         } else {
             theme = "FourInARowDark.css";
+            $("#themeSwitch").find("img").attr("src", "sun.png");
         }
         saveTheme(theme);
         reloadTheme();
