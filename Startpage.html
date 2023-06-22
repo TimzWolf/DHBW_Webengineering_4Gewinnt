@@ -2,26 +2,14 @@
 <html>
 <head>
   <title>Vier Gewinnt - Startseite</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $("#play-alone-btn").click(function() {
-        // Weiterleitung zur Einzelspielerseite
-        window.location.href = "FourInARowKI.html";
-      });
-
-      $("#play-with-friend-btn").click(function() {
-        // Weiterleitung zur Mehrspielerseite
-        window.location.href = "FourInARow.html";
-      });
-    });
-  </script>
+  <link id="themeCSS" rel="stylesheet" type="text/css" href="FourInARowDark.css">
 </head>
 <body>
-<h1>Vier Gewinnt</h1>
-<h2>Willkommen!</h2>
-<p>Wählen Sie eine Option:</p>
-<button id="play-alone-btn">Alleine gegen KI spielen</button>
-<button id="play-with-friend-btn">Zu zweit spielen</button>
+  <h1>Vier Gewinnt</h1>
+  <h2>Willkommen!</h2>
+  <div>
+    <a href="ki.html"><button class="Button" id="play-alone-btn">1 Spieler</button></a>
+    <a href="FourInARow.html"><button class="Button" id="play-with-friend-btn">2 Spieler</button></a>
+  </div>
 </body>
 </html>
