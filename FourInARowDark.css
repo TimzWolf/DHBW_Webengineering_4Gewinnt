@@ -116,3 +116,11 @@ body {
     font-weight: bold;
     margin: 0 5px 0 5px;
 }
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content : center;
+}
