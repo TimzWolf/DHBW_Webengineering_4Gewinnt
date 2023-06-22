@@ -149,7 +149,7 @@ $(document).ready(function() {
             checkDiagonalWin1(columnIndex, rowIndex) ||
             checkDiagonalWin2(columnIndex, rowIndex)
         ) {
-
+            //winninganimation();
             // Add 1 to winner score
             let scores = loadScores();
             (currentPlayer === "yellow" ? scores.yellow++ : scores.red++);
@@ -162,6 +162,22 @@ $(document).ready(function() {
             return true;
         }
         return false;
+    }
+
+    function winninganimation(){
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('win-animation');
+
+        const messageText = document.createElement('span');
+        messageText.textContent = 'Spieler ' + currentPlayer + ' hat gewonnen!';
+
+        const image = document.createElement('img');
+        image.src = 'trophy.png';
+
+        messageContainer.appendChild(messageText);
+        messageContainer.appendChild(image);
+
+        container.appendChild(messageContainer);
     }
 
     // Function to check for a vertical win
