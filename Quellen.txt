@@ -3,4 +3,5 @@ Moon: <div> Icons made by <a href="https://www.flaticon.com/authors/good-ware" t
 Plus: <a href="https://www.flaticon.com/free-icons/plus" title="plus icons">Plus icons created by Freepik - Flaticon</a> 
 Minus: <div> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
 Reset Size: <div> Icons made by <a href="https://www.flaticon.com/authors/maan-icons" title="Maan Icons"> Maan Icons </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
-scoreboard: <div> Icons made by <a href="" title="fjstudio"> fjstudio </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div> 
+Scoreboard: <div> Icons made by <a href="" title="fjstudio"> fjstudio </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div> 
+Home: <div> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
