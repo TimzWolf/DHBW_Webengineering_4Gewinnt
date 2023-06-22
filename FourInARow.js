@@ -9,7 +9,16 @@ $(document).ready(function() {
     updatePlayerScores();
     reloadSizes();
     reloadTheme();
-    
+
+    // Set up click event Listener for reset points
+    document.getElementById("resetPoints").addEventListener("click", function() {
+        let scores = loadScores();
+        scores.red = 0;
+        scores.yellow = 0;
+        saveScores(scores);
+        updatePlayerScores();
+    });
+
     // Set up click event Listener for theme switch
     document.getElementById("themeSwitch").addEventListener("click", function() {
         let theme = loadTheme();
@@ -31,8 +40,8 @@ $(document).ready(function() {
         sizes.cellHeight += 10;
 
         //increase PlayerCircle
-        sizes.playerCircleWidth += 10;
-        sizes.playerCircleHeight += 10;
+        sizes.playerCircleWidth += 5;
+        sizes.playerCircleHeight += 5;
 
         saveSizes(sizes);
         reloadSizes()
@@ -41,13 +50,22 @@ $(document).ready(function() {
     //set up click event Listener for decrease Button
     document.getElementById("decreaseSize").addEventListener("click", function() {
         let sizes = loadSizes();
-        //decrease cells
-        sizes.cellWidth -= 10;
-        sizes.cellHeight -= 10;
 
-        //decrease PlayerCircle
-        sizes.playerCircleWidth -= 10;
-        sizes.playerCircleHeight -= 10;
+        if (sizes.cellWidth >= 30){
+            //decrease cells
+            sizes.cellWidth -= 10;
+            sizes.cellHeight -= 10;
+
+            //decrease PlayerCircle
+            sizes.playerCircleWidth -= 5;
+            sizes.playerCircleHeight -= 5;
+        }
+        else{
+            alert("Die Anzeige kann nicht mehr kleiner gemacht werden!")
+        }
+
+
+
 
         saveSizes(sizes);
         reloadSizes()
