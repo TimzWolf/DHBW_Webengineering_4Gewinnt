@@ -4,8 +4,6 @@ body {
     flex-direction: column;
     text-align: center;
     user-select: none;
-    background-color: #222;
-    color: #fff;
 }
 
 #board {
@@ -17,7 +15,6 @@ body {
     width: 50px;
     height: 50px;
     border: 1px solid #ccc;
-    background-color: #333;
     display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
@@ -26,7 +23,6 @@ body {
 }
 
 .cell.empty:hover {
-    background-color: #444;
     cursor: pointer;
 }
 
@@ -36,10 +32,6 @@ body {
 
 .cell.red, .redCircle {
     background-color: red;
-}
-
-.cell.winYellow, .cell.winRed {
-    background-color: rgba(128, 128, 128);
 }
 
 #playerIndicator {
@@ -56,9 +48,13 @@ body {
     display: none;
 }
 
+.cell.winYellow,
+.cell.winRed {
+    background-color: rgba(128, 128, 128);
+}
+
 #gameBoard {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-around;
 }
@@ -102,7 +98,6 @@ body {
 }
 
 .Button:hover {
-    opacity: 0.7;
     padding: 12px 22px;
 }
 
@@ -117,6 +112,7 @@ body {
     font-weight: bold;
     margin: 0 5px 0 5px;
 }
+
 
 footer{
     position: absolute;
@@ -139,3 +135,5 @@ footer{
     position: absolute;
     left: 0;
 }
+
+
