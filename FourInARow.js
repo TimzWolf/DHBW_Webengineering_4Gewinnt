@@ -149,7 +149,6 @@ $(document).ready(function() {
             checkDiagonalWin1(columnIndex, rowIndex) ||
             checkDiagonalWin2(columnIndex, rowIndex)
         ) {
-            //winninganimation();
             // Add 1 to winner score
             let scores = loadScores();
             (currentPlayer === "yellow" ? scores.yellow++ : scores.red++);
@@ -159,6 +158,7 @@ $(document).ready(function() {
             reloadPlayerScores();
 
             markWinningCells();
+            //winninganimation();
             return true;
         }
         return false;
@@ -177,7 +177,7 @@ $(document).ready(function() {
         messageContainer.appendChild(messageText);
         messageContainer.appendChild(image);
 
-        container.appendChild(messageContainer);
+        points.appendChild(messageContainer);
     }
 
     // Function to check for a vertical win
