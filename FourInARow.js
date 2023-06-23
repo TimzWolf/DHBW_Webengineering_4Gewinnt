@@ -65,10 +65,6 @@ $(document).ready(function() {
         else{
             alert("Die Anzeige kann nicht mehr kleiner gemacht werden!")
         }
-
-
-
-
         saveSizes(sizes);
         reloadSizes()
     });
@@ -158,26 +154,20 @@ $(document).ready(function() {
             reloadPlayerScores();
 
             markWinningCells();
-            //winninganimation();
+            winninganimation();
             return true;
         }
         return false;
     }
 
     function winninganimation(){
-        const messageContainer = document.createElement('div');
-        messageContainer.classList.add('win-animation');
+       if (currentPlayer === "yellow"){
+           $("#winningAnimationYellow").css("visibility", "visible");
 
-        const messageText = document.createElement('span');
-        messageText.textContent = 'Spieler ' + currentPlayer + ' hat gewonnen!';
-
-        const image = document.createElement('img');
-        image.src = 'trophy.png';
-
-        messageContainer.appendChild(messageText);
-        messageContainer.appendChild(image);
-
-        points.appendChild(messageContainer);
+       }
+       else{
+           $("#winningAnimationRed").css("visibility", "visible");
+       }
     }
 
     // Function to check for a vertical win
@@ -437,8 +427,6 @@ $(document).ready(function() {
         $("#pointsRed").text(scores.red);
         $("#pointsYellow").text(scores.yellow);
     }
-
-
 });
 
 

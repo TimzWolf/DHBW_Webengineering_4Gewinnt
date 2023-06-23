@@ -96,22 +96,21 @@
     right:0;
     bottom:0;
     margin-right: 20px;
-    margin-bottom: 45px;
+    margin-bottom: 75px;
 }
 
 /*Wininganimation*/
 .win-animation {
+    visibility: hidden;
     width: 100px;
     height: 100px;
     animation-name: win;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    font-family: Comic Sans MS;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 @keyframes win {
@@ -119,10 +118,7 @@
         transform: scale(1);
     }
     50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
+        transform: scale(1.5);
     }
 }
 
