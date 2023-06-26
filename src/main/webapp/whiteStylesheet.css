@@ -1,0 +1,21 @@
+body {
+    background-color: #fff;
+    color: #222;
+}
+
+.cell {
+    background-color: #f5f5f5;
+}
+
+.cell.empty:hover {
+    background-color: #ebebeb;
+}
+
+.Button:hover {
+    opacity: 1;
+}
+
+.Button {
+    opacity: 0.7;
+    color: white;
+}

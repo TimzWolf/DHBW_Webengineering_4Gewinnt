@@ -2,7 +2,9 @@
 <html lang="de">
 <head>
     <title>Vier Gewinnt</title>
-    <link id="themeCSS" rel="stylesheet" type="text/css" href="FourInARowDark.css">
+    <link rel="stylesheet" type="text/css" href="mainStylesheet.css">
+    <link rel="stylesheet" type="text/css" href="gameStylesheet.css">
+    <link id="themeCSS" rel="stylesheet" type="text/css" href="darkStylesheet.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="FourInARow.js"></script>
 </head>
@@ -24,6 +26,9 @@
     <div class="points">
         <p>Punkte Rot</p>
         <p id="pointsRed"></p>
+        <div id="winningAnimationRed" class="win-animation">
+            <img src="trophy.png" alt="Gewinner">
+        </div>
     </div>
     <div id="board">
         <!-- Generate game board dynamically using JavaScript -->
@@ -48,6 +53,9 @@
     <div class="points">
         <p>Punkte Gelb</p>
         <p id="pointsYellow"></p>
+        <div id="winningAnimationYellow" class="win-animation">
+            <img src="trophy.png" alt="Gewinner">
+        </div>
     </div>
 </div>
 <!-- Game status -->
@@ -68,10 +76,13 @@
 </div>
 </body>
 <footer>
-        Copyright &copy;
+    <div>
+        Copyright
+        &copy;
         <script>
             document.write(new Date().getFullYear());
         </script>, Vier-Gewinnt Spiel
-    </a>
+    </div>
+    <a id="impressum" href="impressum.html">Impressum</a>
 </footer>
 </html>

@@ -22,11 +22,11 @@ $(document).ready(function() {
     // Set up click event Listener for theme switch
     document.getElementById("themeSwitch").addEventListener("click", function() {
         let theme = loadTheme();
-        if (theme === "FourInARowDark.css") {
-            theme = "FourInARowWhite.css";
+        if (theme === "darkStylesheet.css") {
+            theme = "whiteStylesheet.css";
             $("#themeSwitch").find("img").attr("src", "moon.png");
         } else {
-            theme = "FourInARowDark.css";
+            theme = "darkStylesheet.css";
             $("#themeSwitch").find("img").attr("src", "sun.png");
         }
         saveTheme(theme);
@@ -65,10 +65,6 @@ $(document).ready(function() {
         else{
             alert("Die Anzeige kann nicht mehr kleiner gemacht werden!")
         }
-
-
-
-
         saveSizes(sizes);
         reloadSizes()
     });
@@ -149,7 +145,6 @@ $(document).ready(function() {
             checkDiagonalWin1(columnIndex, rowIndex) ||
             checkDiagonalWin2(columnIndex, rowIndex)
         ) {
-
             // Add 1 to winner score
             let scores = loadScores();
             (currentPlayer === "yellow" ? scores.yellow++ : scores.red++);
@@ -159,9 +154,20 @@ $(document).ready(function() {
             reloadPlayerScores();
 
             markWinningCells();
+            winninganimation();
             return true;
         }
         return false;
+    }
+
+    function winninganimation(){
+       if (currentPlayer === "yellow"){
+           $("#winningAnimationYellow").css("visibility", "visible");
+
+       }
+       else{
+           $("#winningAnimationRed").css("visibility", "visible");
+       }
     }
 
     // Function to check for a vertical win
@@ -407,7 +413,7 @@ $(document).ready(function() {
         if (themeCookie) {
             return JSON.parse(themeCookie);
         } else {
-            return "FourInARowDark.css";
+            return "darkStylesheet.css";
         }
     }
 
@@ -421,8 +427,6 @@ $(document).ready(function() {
         $("#pointsRed").text(scores.red);
         $("#pointsYellow").text(scores.yellow);
     }
-
-
 });
 
 
