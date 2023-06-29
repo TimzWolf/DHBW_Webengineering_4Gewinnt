@@ -24,8 +24,8 @@
 
 <!-- Player indicator -->
 <div id="playerIndicator">
-    <div class="playerCircle redCircle" <%= (spielbrett.isInGame() && spielbrett.getCurrentPlayer() == 1) ? "style=\"display: block\"" : "" %>></div>
-    <div class="playerCircle yellowCircle" <%= (spielbrett.isInGame() && spielbrett.getCurrentPlayer() == 2) ? "style=\"display: block\"" : "" %>></div>
+    <div class="playerCircle redCircle" <%= (spielbrett.getCurrentPlayer() == 1) ? "style=\"display: block\"" : "" %>></div>
+    <div class="playerCircle yellowCircle" <%= (spielbrett.getCurrentPlayer() == 2) ? "style=\"display: block\"" : "" %>></div>
 </div>
 <!-- Game board -->
 <div id="gameBoard">

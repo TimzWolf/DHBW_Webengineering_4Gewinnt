@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "spielservlet", value = "/four-in-a-ro")
+@WebServlet(name = "spielservlet", value = "/four-in-a-row")
 public class FiaRDuoServlet extends HttpServlet {
     private Map<String, SpielbrettBean> sessionSpielbrett;
 
