@@ -170,6 +170,16 @@ $(document).ready(function() {
        }
     }*/
 
+    function winninganimation(){
+       if (currentPlayer === "yellow"){
+           $("#winningAnimationYellow").css("visibility", "visible");
+
+       }
+       else{
+           $("#winningAnimationRed").css("visibility", "visible");
+       }
+    }
+
     // Function to check for a vertical win
     /*function checkVerticalWin(columnIndex, rowIndex) {
         let count = 1;
