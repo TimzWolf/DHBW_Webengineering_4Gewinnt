@@ -7,21 +7,28 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-@WebServlet(name = "spielservlet", value = "/")
-public class SpielServlet extends HttpServlet {
-    private SpielbrettBean spielbrett;
+@WebServlet(name = "spielservlet", value = "/four-in-a-ro")
+public class FiaRDuoServlet extends HttpServlet {
+    private Map<String, SpielbrettBean> sessionSpielbrett;
 
     @Override
     public void init() {
-        spielbrett = new SpielbrettBean();
+        sessionSpielbrett = new HashMap<>();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String sessionId = request.getSession().getId();
+        SpielbrettBean spielbrett = sessionSpielbrett.get(sessionId);
+        if(spielbrett == null) {
+            spielbrett = new SpielbrettBean();
+            sessionSpielbrett.put(sessionId,spielbrett);
+            System.out.println("Created Spielbrett for Session " + sessionId);
+        }
 
         if(request.getParameter("column")!=null) {
             // Benutzereingaben verarbeiten
@@ -29,21 +36,22 @@ public class SpielServlet extends HttpServlet {
 
             // Spielstein setzen und Spielzustand überprüfen
             if (spielbrett.setStone(column)) {
-                if (spielbrett.checkWin()) {
-                    // Gewinner ermittelt
-                    String winner = (spielbrett.getCurrentPlayer() == 1) ? "Spieler 1" : "Spieler 2";
-                    request.setAttribute("winner", winner);
-                } else
+                // Gewinner ermittelt
+                if (!spielbrett.checkWin() && !spielbrett.checkDraw())
                     // Zum nächsten Spieler wechseln
                     spielbrett.switchPlayer();
+
             }
         }
 
         if(request.getParameter("reset")!=null)
             spielbrett.reset();
 
+        if(request.getParameter("resetScore")!=null)
+            spielbrett.resetScore();
+
         // Aktuellen Spielzustand an JSP-Seite übergeben
         request.setAttribute("spielbrett", spielbrett);
-        request.getRequestDispatcher("spiel.jsp").forward(request, response);
+        request.getRequestDispatcher("FourInARow.jsp").forward(request, response);
     }
 }

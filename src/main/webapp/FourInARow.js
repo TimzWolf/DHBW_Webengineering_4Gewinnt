@@ -1,26 +1,26 @@
 $(document).ready(function() {
-    const status = $("#status");
-    const resetButton = $("#reset");
+    /*const status = $("#status");
+    const resetButton = $("#reset");*/
     const cells = $(".cell");
     const playerCircles = $(".playerCircle");
 
-    let currentPlayer = "yellow";
+    /*let currentPlayer = "yellow";
     let gameOver = false;
-    reloadPlayerScores();
+    reloadPlayerScores();*/
     reloadSizes();
     reloadTheme();
 
     // Set up click event Listener for reset points
-    document.getElementById("resetPoints").addEventListener("click", function() {
+    /*document.getElementById("resetPoints").addEventListener("click", function() {
         let scores = loadScores();
         scores.red = 0;
         scores.yellow = 0;
         saveScores(scores);
         reloadPlayerScores();
-    });
+    });*/
 
     // Set up click event Listener for theme switch
-    document.getElementById("themeSwitch").addEventListener("click", function() {
+    $("#themeSwitch").click(() => {
         let theme = loadTheme();
         if (theme === "darkStylesheet.css") {
             theme = "whiteStylesheet.css";
@@ -34,7 +34,7 @@ $(document).ready(function() {
     });
 
     //set up click event Listener for increase Button
-    document.getElementById("increaseSize").addEventListener("click", function() {
+    $("#increaseSize").click(()=> {
         let sizes = loadSizes();
         console.log("Width: " , sizes.cellWidth , " Height: " ,  sizes.cellHeight);
         //increase cells
@@ -46,11 +46,11 @@ $(document).ready(function() {
         sizes.playerCircleHeight += 5;
 
         saveSizes(sizes);
-        reloadSizes()
+        reloadSizes();
     });
 
     //set up click event Listener for decrease Button
-    document.getElementById("decreaseSize").addEventListener("click", function() {
+    $("#decreaseSize").click(()=> {
         let sizes = loadSizes();
 
         if (sizes.cellWidth >= 30){
@@ -66,13 +66,13 @@ $(document).ready(function() {
             alert("Die Anzeige kann nicht mehr kleiner gemacht werden!")
         }
         saveSizes(sizes);
-        reloadSizes()
-    });
+        reloadSizes();
+    })
 
     //Set up click event Listener for resetGame Button
-    document.getElementById("resetGame").addEventListener("click", function() {
+    /*document.getElementById("resetGame").addEventListener("click", function() {
         location.reload();
-    });
+    });*/
 
     //change sizes in GUI
     function reloadSizes(){
@@ -94,7 +94,7 @@ $(document).ready(function() {
     }
 
     // Set up click event listeners for each cell
-    cells.on("click", function() {
+    /*cells.on("click", function() {
         if (!gameOver && $(this).hasClass("empty")) {
             const columnIndex = $(this).index();
             const rowIndex = getLowestEmptyRow(columnIndex);
@@ -102,23 +102,23 @@ $(document).ready(function() {
                 dropToken(columnIndex, rowIndex);
             }
         }
-    });
+    });*/
 
     // Set up click event listener for reset button
-    resetButton.on("click", resetGame);
+    //resetButton.on("click", resetGame);
 
     // Function to find the lowest empty row in a given column
-    function getLowestEmptyRow(columnIndex) {
+    /*function getLowestEmptyRow(columnIndex) {
         for (let row = 5; row >= 0; row--) {
             if (cells.eq(row * 7 + columnIndex).hasClass("empty")) {
                 return row;
             }
         }
         return -1;
-    }
+    }*/
 
     // Function to drop a token into a specific column and row
-    function dropToken(columnIndex, rowIndex) {
+    /*function dropToken(columnIndex, rowIndex) {
         let cell = cells.eq(rowIndex * 7 + columnIndex);
         cell.removeClass("empty");
         cell.addClass(currentPlayer);
@@ -135,10 +135,10 @@ $(document).ready(function() {
             currentPlayer = (currentPlayer === "yellow" ? "red" : "yellow");
             updatePlayerIndicator();
         }
-    }
+    }*/
 
     // Function to check for a win condition
-    function checkWin(columnIndex, rowIndex) {
+    /*function checkWin(columnIndex, rowIndex) {
         if (
             checkVerticalWin(columnIndex, rowIndex) ||
             checkHorizontalWin(columnIndex, rowIndex) ||
@@ -158,9 +158,9 @@ $(document).ready(function() {
             return true;
         }
         return false;
-    }
+    }*/
 
-    function winninganimation(){
+    /*function winninganimation(){
        if (currentPlayer === "yellow"){
            $("#winningAnimationYellow").css("visibility", "visible");
 
@@ -168,10 +168,10 @@ $(document).ready(function() {
        else{
            $("#winningAnimationRed").css("visibility", "visible");
        }
-    }
+    }*/
 
     // Function to check for a vertical win
-    function checkVerticalWin(columnIndex, rowIndex) {
+    /*function checkVerticalWin(columnIndex, rowIndex) {
         let count = 1;
         let y = rowIndex - 1;
 
@@ -189,10 +189,10 @@ $(document).ready(function() {
             y++;
         }
         return count >= 4;
-    }
+    }*/
 
     // Function to check for a horizontal win
-    function checkHorizontalWin(columnIndex, rowIndex) {
+    /*function checkHorizontalWin(columnIndex, rowIndex) {
         let count = 1;
         let x = columnIndex - 1;
 
@@ -210,10 +210,10 @@ $(document).ready(function() {
             x++;
         }
         return count >= 4;
-    }
+    }*/
 
     // Function to check for a diagonal win (top left to bottom right)
-    function checkDiagonalWin1(columnIndex, rowIndex) {
+    /*function checkDiagonalWin1(columnIndex, rowIndex) {
         let count = 1;
         let x = columnIndex - 1;
         let y = rowIndex - 1;
@@ -235,10 +235,10 @@ $(document).ready(function() {
             y++;
         }
         return count >= 4;
-    }
+    }*/
 
     // Function to check for a diagonal win (top right to bottom left)
-    function checkDiagonalWin2(columnIndex, rowIndex) {
+    /*function checkDiagonalWin2(columnIndex, rowIndex) {
         let count = 1;
         let x = columnIndex - 1;
         let y = rowIndex + 1;
@@ -260,20 +260,20 @@ $(document).ready(function() {
             y--;
         }
         return count >= 4;
-    }
+    }*/
 
     // Function to check for a draw
-    function checkDraw() {
+    /*function checkDraw() {
         for (let i = 0; i < cells.length; i++) {
             if (cells.eq(i).hasClass("empty")) {
                 return false;
             }
         }
         return true;
-    }
+    }*/
 
     // Function to mark the winning cells
-    function markWinningCells() {
+    /*function markWinningCells() {
         let winningCells = (currentPlayer === "yellow" ? "winYellow" : "winRed");
 
         // Vertical win
@@ -347,15 +347,15 @@ $(document).ready(function() {
                 }
             }
         }
-    }
+    }*/
 
     // Function to reset the game
-    function resetGame() {
+    /*function resetGame() {
         location.reload();
-    }
+    }*/
 
     // Function to update the player indicator
-    function updatePlayerIndicator() {
+    /*function updatePlayerIndicator() {
         for (let i = 0; i < playerCircles.length; i++) {
             playerCircles.eq(i).css("display", "none");
         }
@@ -365,12 +365,12 @@ $(document).ready(function() {
         } else {
             playerCircles.eq(1).css("display", "block");
         }
-    }
+    }*/
 
-    updatePlayerIndicator();
+    //updatePlayerIndicator();
 
     // Load scores from Cookies
-    function loadScores() {
+    /*function loadScores() {
         const scoresCookie = document.cookie.replace(/(?:^|.*;\s*)scores\s*\=\s*([^;]*).*$|^.*$/, "$1");
         if (scoresCookie) {
             return JSON.parse(scoresCookie);
@@ -380,12 +380,12 @@ $(document).ready(function() {
                 yellow: 0
             };
         }
-    }
+    }*/
 
     // Save scores to Cookies
-    function saveScores(scores) {
+    /*function saveScores(scores) {
         document.cookie = `scores=${JSON.stringify(scores)}`;
-    }
+    }*/
 
     // Load sizes from Cookies
     function loadSizes() {
@@ -422,11 +422,11 @@ $(document).ready(function() {
         document.cookie = `theme=${JSON.stringify(theme)}`;
     }
 
-    function reloadPlayerScores(){
+    /*function reloadPlayerScores(){
         let scores = loadScores();
         $("#pointsRed").text(scores.red);
         $("#pointsYellow").text(scores.yellow);
-    }
+    }*/
 });
 
 
