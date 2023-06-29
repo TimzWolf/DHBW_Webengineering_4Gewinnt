@@ -1,0 +1,124 @@
+#head{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+#head button{
+    position: absolute;
+    left: 0;
+}
+
+#gameBoard {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#board {
+    position: relative;
+    display: inline-block;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.cell.empty:hover {
+    cursor: pointer;
+}
+
+.cell.yellow, .yellowCircle {
+    background-color: yellow;
+}
+
+.cell.red, .redCircle {
+    background-color: red;
+}
+
+.cell.winYellow,
+.cell.winRed {
+    background-color: rgba(128, 128, 128);
+}
+
+#playerIndicator {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.playerCircle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 5px;
+    display: none;
+}
+
+.points {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.points p {
+    margin: 5px;
+    font-size: 16px;
+}
+
+.points p:first-child {
+    font-weight: bold;
+}
+
+#status {
+    margin-top: 20px;
+}
+
+#reset {
+    visibility: hidden;
+    margin-top: 20px;
+}
+
+#ThemeButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position:absolute;
+    right:0;
+    bottom:0;
+    margin-right: 20px;
+    margin-bottom: 75px;
+}
+
+/*Wininganimation*/
+.win-animation {
+    visibility: hidden;
+    width: 100px;
+    height: 100px;
+    animation-name: win;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes win {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+}
+
