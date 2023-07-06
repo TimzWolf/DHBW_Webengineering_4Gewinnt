@@ -9,7 +9,7 @@
   <h1>Vier Gewinnt</h1>
   <h2>Willkommen!</h2>
   <div>
-    <a href="ki.html"><button class="Button" id="play-alone-btn">1 Spieler</button></a>
+    <a href="four-in-a-row-ki"><button class="Button" id="play-alone-btn">1 Spieler</button></a>
     <a href="four-in-a-row"><button class="Button" id="play-with-friend-btn">2 Spieler</button></a>
   </div>
 </body>
