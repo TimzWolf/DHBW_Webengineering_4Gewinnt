@@ -1,4 +1,6 @@
 package de.dhbw.tinf22b4.viergewinnt.beans;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class SpielbrettBean {
@@ -8,6 +10,8 @@ public class SpielbrettBean {
     private static final int PLAYER1 = 1;
     private static final int PLAYER2 = 2;
     private static final int WINROW = 3;
+
+    private static final ArrayList<Integer> COLLUMS = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
 
     private int[][] board;
     private int currentPlayer;
@@ -169,22 +173,29 @@ public class SpielbrettBean {
         int maxScore = -1;
 
         for (int column = 0; column < COLS; column++) {
-            if (setStone(column)) {
+            //if (setStone(column)) {
                 int connectedPieces = calcMaxScore(currentPlayer);
-                resetStone(column);
+                //resetStone(column);
 
-                if (connectedPieces > maxScore) {
+                if (connectedPieces > maxScore && board[0][column] == EMPTY) {
                     maxScore = connectedPieces;
                     bestMove = column;
                 }
-            }
+            //}
         }
 
         if (maxScore <= 0) {
-            System.out.println("random");
             Random random = new Random();
-            bestMove = random.nextInt(8);
+            for (int i = 0; i < COLS; i++) {
+                System.out.println("random");
+                bestMove = random.nextInt(COLLUMS.size());
+                if (board[0][bestMove] != EMPTY) {
+                    COLLUMS.remove(bestMove);
+                } else break;
+            }
+
         }
+
         System.out.println("best move:" + bestMove);
         return bestMove;
     }
