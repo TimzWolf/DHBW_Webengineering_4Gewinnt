@@ -173,15 +173,16 @@ public class SpielbrettBean {
         int maxScore = -1;
 
         for (int column = 0; column < COLS; column++) {
-            //if (setStone(column)) {
-                int connectedPieces = calcMaxScore(currentPlayer);
-                //resetStone(column);
-
-                if (connectedPieces > maxScore && board[0][column] == EMPTY) {
-                    maxScore = connectedPieces;
-                    bestMove = column;
+            for (int row = ROWS - 1; row >= 0; row--){
+                if (board[row][column] == EMPTY){
+                    int connectedPieces = calcMaxScore(currentPlayer, row, column);
+                    if (connectedPieces > maxScore && board[0][column] == EMPTY) {
+                        maxScore = connectedPieces;
+                        bestMove = column;
+                    }
+                    break;
                 }
-            //}
+            }
         }
 
         if (maxScore <= 0) {
@@ -193,86 +194,71 @@ public class SpielbrettBean {
                     COLLUMS.remove(bestMove);
                 } else break;
             }
-
         }
 
         System.out.println("best move:" + bestMove);
         return bestMove;
     }
 
-    private int calcMaxScore(int player) {
+    private int calcMaxScore(int player, int row, int column) {
         int maxConnected = -1;
-
-        // Check for connected pieces horizontally
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j <= COLS - WINROW; j++) {
-                int count = 0;
-                for (int k = 1; k < WINROW; k++) {
-                    if (board[i][j + k] == player) {
-                        count++;
-                    } else {
-                        break;
-                    }
+        int count = 0;
+        for(int i = 0; i < WINROW; i++) {
+            if (column + i < COLS) {
+                if (board[row][column + i] == currentPlayer) {
+                    count++;
                 }
-                maxConnected = Math.max(maxConnected, count);
             }
-        }
-
-        // Check for connected pieces vertically
-        for (int j = 0; j < COLS; j++) {
-            for (int i = 0; i <= ROWS - WINROW; i++) {
-                int count = 0;
-                for (int k = 1; k < WINROW; k++) {
-                    if (board[i + k][j] == player) {
-                        count++;
-                    } else {
-                        break;
-                    }
+            if (column - i >= 0) {
+                if (board[row][column - i] == currentPlayer) {
+                    count++;
                 }
-                maxConnected = Math.max(maxConnected, count);
-            }
+            } else break;
         }
-
-        // Check for connected pieces diagonally (positive)
-        for (int i = 0; i <= ROWS - WINROW; i++) {
-            for (int j = 0; j <= COLS - WINROW; j++) {
-                int count = 0;
-                for (int k = 1; k < WINROW; k++) {
-                    if (board[i + k][j + k] == player) {
-                        count++;
-                    } else {
-                        break;
-                    }
+        maxConnected = Math.max(maxConnected, count);
+        count = 0;
+        for(int i = 0; i < WINROW; i++) {
+            if (row + i < ROWS) {
+                if (board[row + i][column] == currentPlayer) {
+                    count++;
                 }
-                maxConnected = Math.max(maxConnected, count);
             }
-        }
-
-        // Check for connected pieces diagonally (negative)
-        for (int i = WINROW - 1; i < ROWS; i++) {
-            for (int j = 0; j <= COLS - WINROW; j++) {
-                int count = 0;
-                for (int k = 1; k < WINROW; k++) {
-                    if (board[i - k][j + k] == player) {
-                        count++;
-                    } else {
-                        break;
-                    }
+            if (row - i >= 0) {
+                if (board[row - i][column] == currentPlayer) {
+                    count++;
                 }
-                maxConnected = Math.max(maxConnected, count);
-            }
+            } else break;
         }
-
+        maxConnected = Math.max(maxConnected, count);
+        count = 0;
+        for(int i = 0; i < WINROW; i++) {
+            if (column + i < COLS && row + i < ROWS) {
+                if (board[row + i][column + i] == currentPlayer) {
+                    count++;
+                }
+            }
+            if (column - i >= 0 && row - i >= 0) {
+                if (board[row - i][column - i] == currentPlayer) {
+                    count++;
+                }
+            } else break;
+        }
+        maxConnected = Math.max(maxConnected, count);
+        count = 0;
+        for(int i = 0; i < WINROW; i++) {
+            if (row - i >= 0 &&column + i < COLS) {
+                if (board[row - i][column + i] == currentPlayer) {
+                    count++;
+                }
+            }
+            if (row + i < ROWS && column - i >= 0) {
+                if (board[row + i][column - i] == currentPlayer) {
+                    count++;
+                }
+            } else break;
+        }
+        maxConnected = Math.max(maxConnected, count);
         return maxConnected;
-    }
-
-    private void resetStone(int column) {
-        for (int i = 0; i < ROWS; i++) {
-            if (board[i][column] != EMPTY) {
-                board[i][column] = EMPTY;
-                break;
-            }
-        }
     }
 
 
