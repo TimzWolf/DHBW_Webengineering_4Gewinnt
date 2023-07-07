@@ -188,15 +188,12 @@ public class SpielbrettBean {
         if (maxScore <= 0) {
             Random random = new Random();
             for (int i = 0; i < COLS; i++) {
-                System.out.println("random");
                 bestMove = random.nextInt(COLLUMS.size());
                 if (board[0][bestMove] != EMPTY) {
                     COLLUMS.remove(bestMove);
                 } else break;
             }
         }
-
-        System.out.println("best move:" + bestMove);
         return bestMove;
     }
 
