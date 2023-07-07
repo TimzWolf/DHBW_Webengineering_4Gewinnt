@@ -11,7 +11,7 @@ public class SpielbrettBean {
     private static final int PLAYER2 = 2;
     private static final int WINROW = 3;
 
-    private static final ArrayList<Integer> COLLUMS = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
+    private static final ArrayList<Integer> COLUMN = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
 
     private int[][] board;
     private int currentPlayer;
@@ -107,75 +107,22 @@ public class SpielbrettBean {
         return false;
     }
 
-    /*public int getBestMove() {
-        int bestMove = 0;
-        int maxScore = 0;
-        for (int i = 0; i < COLS; i++){
-            for (int j = ROWS - 1; j >= 0; j--){
-                if (board[j][i] == EMPTY){
-                    int currentScore = bestScore(j, i);
-                    if (maxScore < currentScore){
-                        maxScore = currentScore;
-                        bestMove = j;
-                    }
-                }
-            }
-        }
-        if (maxScore == 0) {
-            Random random = new Random();
-            bestMove = random.nextInt(8);
-        }
-        return bestMove;
-    }
-
-    public int bestScore(int row, int col){
-        int maxScore = 0;
-        if (col == 0) {
-            for (int i = row + 1; i < ROWS; i++) {
-                if (board[i][col] != currentPlayer) {
-                    maxScore = Math.max(maxScore, i - row -1);
-                    break;
-                }
-            }
-            for (int i = col + 1; i < COLS; i++){
-                if (board[row][i] != currentPlayer || board[row][i] == EMPTY){
-                    maxScore = Math.max(maxScore, i- col - 1);
-                    break;
-                }
-            }
-            for (int i = 1; i < ROWS; i++) {
-                if (row + i < ROWS) {
-                    if (board[row + 1][col + 1] != currentPlayer || board[row + 1][col + 1] == EMPTY) {
-                        maxScore = Math.max(maxScore, i - 1);
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-            for (int i = 1; i < ROWS; i++) {
-                if (row - i >= 0) {
-                    if (board[row - 1][col + 1] != currentPlayer || board[row - 1][col + 1] == EMPTY) {
-                        maxScore = Math.max(maxScore, i - 1);
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-
-        return maxScore;
-    } */
-
+    /**
+     * Algorithm that tries to find the best move, if there aren't any good ones it
+     * randomizes the move
+     * @return best move or random move
+     */
     public int getBestMove() {
         int bestMove = -1;
         int maxScore = -1;
-
+        //searching columns for possible moves
         for (int column = 0; column < COLS; column++) {
             for (int row = ROWS - 1; row >= 0; row--){
                 if (board[row][column] == EMPTY){
-                    int connectedPieces = calcMaxScore(currentPlayer, row, column);
+                    //calculates the connectable pieces for each possible move
+                    int connectedPieces = calcMaxScore(row, column);
+                    //saves the column and maximum pieces
+                    // if the connectable pieces are more than previous maximum
                     if (connectedPieces > maxScore && board[0][column] == EMPTY) {
                         maxScore = connectedPieces;
                         bestMove = column;
@@ -184,22 +131,33 @@ public class SpielbrettBean {
                 }
             }
         }
-
+        //randomize move if there aren't any good ones
         if (maxScore <= 0) {
             Random random = new Random();
+            ArrayList<Integer> tempCol = COLUMN;
+            //goes through all columns in random order to check if there is space
             for (int i = 0; i < COLS; i++) {
-                bestMove = random.nextInt(COLLUMS.size());
+                bestMove = random.nextInt(tempCol.size());
                 if (board[0][bestMove] != EMPTY) {
-                    COLLUMS.remove(bestMove);
+                    tempCol.remove(bestMove);
                 } else break;
             }
         }
         return bestMove;
     }
 
-    private int calcMaxScore(int player, int row, int column) {
-        int maxConnected = -1;
+    /**
+     * algorithm calculates the connectable pieces for a given move
+     * checks horizontally, vertically, and the two different diagonals
+     * and returns the maximum
+     * @param row row of the move
+     * @param column column of the move
+     * @return highest number of connectable pieces for the given move
+     */
+    private int calcMaxScore(int row, int column) {
+        int maxConnected = 0;
         int count = 0;
+        //check horizontally
         for(int i = 0; i < WINROW; i++) {
             if (column + i < COLS) {
                 if (board[row][column + i] == currentPlayer) {
@@ -212,8 +170,9 @@ public class SpielbrettBean {
                 }
             } else break;
         }
-        maxConnected = Math.max(maxConnected, count);
+        maxConnected = count;
         count = 0;
+        //check vertically
         for(int i = 0; i < WINROW; i++) {
             if (row + i < ROWS) {
                 if (board[row + i][column] == currentPlayer) {
@@ -228,6 +187,7 @@ public class SpielbrettBean {
         }
         maxConnected = Math.max(maxConnected, count);
         count = 0;
+        //check first diagonal
         for(int i = 0; i < WINROW; i++) {
             if (column + i < COLS && row + i < ROWS) {
                 if (board[row + i][column + i] == currentPlayer) {
@@ -242,6 +202,7 @@ public class SpielbrettBean {
         }
         maxConnected = Math.max(maxConnected, count);
         count = 0;
+        //check second diagonal
         for(int i = 0; i < WINROW; i++) {
             if (row - i >= 0 &&column + i < COLS) {
                 if (board[row - i][column + i] == currentPlayer) {
