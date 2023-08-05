@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @WebServlet(name = "spielservletsingle", value = "/four-in-a-row-ki")
 public class FiaRSingleServlet extends HttpServlet {
@@ -37,9 +38,10 @@ public class FiaRSingleServlet extends HttpServlet {
             // Spielstein setzen und Spielzustand überprüfen
             if (spielbrett.setStone(column)) {
                 // Gewinner ermittelt
-                if (!spielbrett.checkWin() && !spielbrett.checkDraw())
+                if (!spielbrett.checkWin() && !spielbrett.checkDraw()) {
                     // Zum nächsten Spieler wechseln
                     spielbrett.switchPlayer();
+                }
                 if (spielbrett.setStone(spielbrett.getBestMove())) {
                     if (!spielbrett.checkWin() && !spielbrett.checkDraw()){
                         spielbrett.switchPlayer();

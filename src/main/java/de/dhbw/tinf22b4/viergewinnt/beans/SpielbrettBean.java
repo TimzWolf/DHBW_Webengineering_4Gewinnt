@@ -119,12 +119,20 @@ public class SpielbrettBean {
         for (int column = 0; column < COLS; column++) {
             for (int row = ROWS - 1; row >= 0; row--){
                 if (board[row][column] == EMPTY){
+                    //calculates the connectable pieces for the opponent
+                    int connectedPiecesOpponent = calcMaxScore(row, column, (currentPlayer % 2) + 1);
+                    //instantly returns the column if the enemy could win
+                    if (connectedPiecesOpponent == WINROW && board[0][column] == EMPTY) {
+                        return column;
+                    }
                     //calculates the connectable pieces for each possible move
-                    int connectedPieces = calcMaxScore(row, column);
+                    int connectedPieces = calcMaxScore(row, column, currentPlayer);
                     //saves the column and maximum pieces
                     // if the connectable pieces are more than previous maximum
-                    if (connectedPieces > maxScore && board[0][column] == EMPTY) {
-                        maxScore = connectedPieces;
+                    //also checks if the AI can interfere more pieces than it can connect ifself and sets the best
+                    // move accordingly
+                    if ((connectedPieces > maxScore || connectedPiecesOpponent > maxScore) && board[0][column] == EMPTY) {
+                        maxScore = Math.max(connectedPieces, connectedPiecesOpponent);
                         bestMove = column;
                     }
                     break;
@@ -154,11 +162,11 @@ public class SpielbrettBean {
      * @param column column of the move
      * @return highest number of connectable pieces for the given move
      */
-    private int calcMaxScore(int row, int column) {
+    private int calcMaxScore(int row, int column, int currentPlayer) {
         int maxConnected = 0;
         int count = 0;
         //check horizontally
-        for(int i = 0; i < WINROW; i++) {
+        for(int i = 0; i <= WINROW; i++) {
             if (column + i < COLS) {
                 if (board[row][column + i] == currentPlayer) {
                     count++;
@@ -173,14 +181,9 @@ public class SpielbrettBean {
         maxConnected = count;
         count = 0;
         //check vertically
-        for(int i = 0; i < WINROW; i++) {
+        for(int i = 0; i <= WINROW; i++) {
             if (row + i < ROWS) {
                 if (board[row + i][column] == currentPlayer) {
-                    count++;
-                }
-            }
-            if (row - i >= 0) {
-                if (board[row - i][column] == currentPlayer) {
                     count++;
                 }
             } else break;
@@ -188,7 +191,7 @@ public class SpielbrettBean {
         maxConnected = Math.max(maxConnected, count);
         count = 0;
         //check first diagonal
-        for(int i = 0; i < WINROW; i++) {
+        for(int i = 0; i <= WINROW; i++) {
             if (column + i < COLS && row + i < ROWS) {
                 if (board[row + i][column + i] == currentPlayer) {
                     count++;
@@ -203,7 +206,7 @@ public class SpielbrettBean {
         maxConnected = Math.max(maxConnected, count);
         count = 0;
         //check second diagonal
-        for(int i = 0; i < WINROW; i++) {
+        for(int i = 0; i <= WINROW; i++) {
             if (row - i >= 0 &&column + i < COLS) {
                 if (board[row - i][column + i] == currentPlayer) {
                     count++;
@@ -241,7 +244,7 @@ public class SpielbrettBean {
     }
 
     public void switchPlayer() {
-        currentPlayer = (currentPlayer == PLAYER1) ? PLAYER2 : PLAYER1;
+        currentPlayer = (currentPlayer % 2) + 1;
     }
 
     public int[][] getBoard() {
