@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Impressum</title>
 </head>
 <body>
   <h1>Impressum</h1>
-  <p>Anton Ameise<br/>
-    Ameisenh&#252;gel 15<br/>
-    02431 Garten<br/>
+  <p>Tim Wolf<br/>
+    Mustertrasse 15<br/>
+    76187 Karlsruhe<br/>
     Tel: 0151519764321<br/>
-    <a href="mailto:anton.ameise@ameisenmail.hügel">anton.ameise@ameisenmail.hügel</a>
+    <a href="mailto:tim.wolf@4gewinnt.com">tim.wolf@4gewinnt.com</a>
   </p>
-  <meta name="generator" content="Impressum-Generator der Kanzlei Hensche Rechtsanwälte"/>
+  <meta name="generator"/>
   <p>&nbsp;</p>
   <h1>Disclaimer - rechtliche Hinweise</h1>
   <p><strong>Auskunfts- und Widerrufsrecht</strong></p>
